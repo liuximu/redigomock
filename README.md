@@ -1,8 +1,8 @@
 # What's it?
 When you use redis in your project, How to mock it is the best problem to UT. `redisgomock` is one library for mock redis.
 
-# Why write by yourself?
-[redigo](https://github.com/gomodule/redigo) recommend [rafaeljusto/redigomock](https://github.com/rafaeljusto/redigomock). But I think it can better:
+# Why write by myself?
+[redigo](https://github.com/gomodule/redigo) recommend [rafaeljusto/redigomock](https://github.com/rafaeljusto/redigomock). But I think it can be better:
 - Use Interface, not struct
 - Fuzzy Match can be simple
   
@@ -26,5 +26,5 @@ if count != 1 {
 ```
 
 # TODO
-- [] UT Coverage > 70%
-- design doc
+- [ ] UT Coverage > 70%
+- [ ] design doc
