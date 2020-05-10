@@ -55,12 +55,12 @@ func equal(as, bs []interface{}) bool {
 	return true
 }
 
-type Exception struct {
+type Expection struct {
 	triggered bool
 
 	operation *Operation
 
-	relay Action
+	reply Action
 }
 
 type Matcher interface {
@@ -73,18 +73,18 @@ func (rm *redigoMock) Match(operation *Operation) (Action, error) {
 	rm.Lock()
 	defer rm.Unlock()
 
-	for _, exception := range rm.exceptions {
-		if exception.triggered {
+	for _, expection := range rm.expections {
+		if expection.triggered {
 			continue
 		}
 
-		if exception.operation.Equal(operation, rm.config) {
-			exception.triggered = true
-			return exception.relay, nil
+		if expection.operation.Equal(operation, rm.config) {
+			expection.triggered = true
+			return expection.reply, nil
 		}
 
 		if rm.config.Order {
-			rm.matchErr = fmt.Errorf("want: %s, got: %s", exception.operation, operation)
+			rm.matchErr = fmt.Errorf("want: %s, got: %s", expection.operation, operation)
 			return nil, rm.matchErr
 		}
 	}

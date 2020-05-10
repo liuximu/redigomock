@@ -12,8 +12,8 @@ In fact, I want submit pull request to rafaeljusto/redigomock, but will change s
 ```
 conn, mock := NewMockClient()
 // prepare 
-mock.ExceptDo("SADD").WillRelay(int64(1))
-mock.ExceptClose()
+mock.ExpectDo("SADD").WillReply(int64(1))
+mock.ExpectClose()
 
 // do
 count, err := redis.Int64(conn.Do("SADD", "element"))

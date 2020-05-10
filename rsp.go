@@ -14,9 +14,9 @@ type ErrRspStub interface {
 	WillReturnError(err error)
 }
 
-type RelayRspStub interface {
+type ReplyRspStub interface {
 	ErrRspStub
-	WillRelay(relay interface{})
+	WillReply(reply interface{})
 }
 
 type Action interface {
@@ -26,17 +26,17 @@ type Action interface {
 
 type Value struct {
 	err   error
-	relay interface{}
+	reply interface{}
 }
 
 var (
 	_ Action = &basicRsp{}
 	_ Action = &errorRsp{}
-	_ Action = &relayRsp{}
+	_ Action = &replyRsp{}
 
 	_ basicRspStub = &basicRsp{}
 	_ ErrRspStub   = &errorRsp{}
-	_ RelayRspStub = &relayRsp{}
+	_ ReplyRspStub = &replyRsp{}
 )
 
 type basicRsp struct {
@@ -85,18 +85,18 @@ func (er *errorRsp) do() error {
 	return nil
 }
 
-type relayRsp struct {
+type replyRsp struct {
 	errorRsp
-	relay interface{}
+	reply interface{}
 }
 
-func (rr *relayRsp) WillRelay(relay interface{}) {
-	rr.relay = relay
+func (rr *replyRsp) WillReply(reply interface{}) {
+	rr.reply = reply
 }
 
-func (rr *relayRsp) value() *Value {
+func (rr *replyRsp) value() *Value {
 	return &Value{
 		err:   rr.err,
-		relay: rr.relay,
+		reply: rr.reply,
 	}
 }

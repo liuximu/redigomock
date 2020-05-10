@@ -53,7 +53,7 @@ func (c *conn) Do(commandName string, args ...interface{}) (reply interface{}, e
 	if err != nil {
 		return nil, err
 	}
-	return val.relay, val.err
+	return val.reply, val.err
 }
 
 // Send writes the command to the client's output buffer.
@@ -88,5 +88,5 @@ func (c *conn) Receive() (reply interface{}, err error) {
 	if err != nil {
 		return nil, err
 	}
-	return val.relay, val.err
+	return val.reply, val.err
 }
